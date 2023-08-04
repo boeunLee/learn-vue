@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <!-- router-link는 최종적으로 화면에 앵커태그로 변환되어 나타난다. -->
+        <router-link to="/login">Login</router-link>
+        <router-link to="/main">Main</router-link>
+      </div>
+      <!-- 뷰 인스턴스에 라우터 인스턴스를 연결하면 사용할 수 있음 -->
+      <router-view></router-view>
+    </div>
+
+    <!-- cdn 방식으로 router 섵치 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <script>
+      var LoginComponent = {
+        template: "<div>login</div>",
+      };
+      var MainComponent = {
+        template: "<div>main</div>",
+      };
+      var router = new VueRouter({
+        // URL의 해쉬 값 제거 속성
+        mode: "history",
+        // 페이지의 라우팅 정보
+        // 페이지의 개수만큼 객체가 필요하다
+        // 여기서는 두 개의 페이지를 구현
+        routes: [
+          {
+            // 페이지의 URL이름
+            path: "/login",
+            // 해당 URL에서 표시될 컴포넌트
+            component: LoginComponent,
+          },
+          {
+            path: "/main",
+            component: MainComponent,
+          },
+        ],
+      });
+
+      new Vue({
+        el: "#app",
+        router: router, // 이 router는 위에서 정의한 router
+      });
+    </script>
+  </body>
+</html>

@@ -8,7 +8,6 @@
   <body>
     <!-- 같은 레벨에서의 컴포넌트 통신 -->
     <div id="app">
-      {{num}}
       <app-header v-bind:propsdata="num"></app-header>
       <app-content v-on:pass="deliverNum"></app-content>
     </div>
