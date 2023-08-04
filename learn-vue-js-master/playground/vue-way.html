@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- vue의 reactivity 구현 -->
+    <div id="app"></div>
+
+    <script>
+      var div = document.querySelector("#app");
+      var viewModal = {};
+
+      // 객체의 동작을 재정의하는 api
+      // Object.defineProperty(대상 객체,객체의 속성, {
+      //   문법(정의할 내용)
+      // });
+
+      // 즉시 실행함수
+      // init과 render가 애플리케이션에 노출되지 않게 또 다른 유효범위에 넣어주는 것이다.
+      (function () {
+        function init() {
+          Object.defineProperty(viewModal, "str", {
+            // 속성에 접근했을 때의 동작을 정의
+            get: function () {
+              console.log("접근");
+            },
+            // 속성의 값을 할당했을 때의 동작을 정의
+            set: function (newValue) {
+              console.log("할당", newValue);
+              render(newValue);
+            },
+          });
+        }
+
+        function render(value) {
+          div.innerHTML = value;
+        }
+
+        init(); //호출
+      })();
+    </script>
+  </body>
+</html>

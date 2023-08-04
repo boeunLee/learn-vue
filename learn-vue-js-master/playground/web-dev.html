@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- div#app + 탭 -->
+    <div id="app"></div>
+
+    <script>
+      // $("#app"); //jQuery
+      var div = document.querySelector("#app");
+      // console.log(div);
+
+      var str = "hello vue";
+      div.innerHTML = str;
+
+      str = "hello vue!!!"; //이 내용은 반영되지 않음
+      div.innerHTML = str; //다시 반영해줘야됨
+
+      // vue의 Reactivity 이용하면 더 간단해짐
+  
+    </script>
+  </body>
+</html>
