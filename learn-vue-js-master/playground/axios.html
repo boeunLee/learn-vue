@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Axios</title>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="getData">get user</button>
+      <!-- users에 담긴 데이터가 여기에 뿌려지도록 -->
+      <div>{{ users }}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          // 이 배열에 response.data를 저장할 것이다
+          users: [],
+        },
+        methods: {
+          getData: function () {
+            // 호출하기 전 this - Vue 자체를 가리킴
+            var vm = this;
+            // 유저 정보 받아오기
+            axios
+              .get("https://jsonplaceholder.typicode.com/users/")
+              // 성공
+              .then(function (response) {
+                console.log(response.data);
+                // 여기에서 this를 정의하면 호출하기 전 this와 다르다
+                vm.users = response.data;
+              })
+              // 실패
+              .catch(function (error) {
+                console.log(error);
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
