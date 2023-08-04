@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 여기서 뷰의 기능과 속성이 유효해진다는 말 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var vm = new Vue({
+        // body안에서 app이라는 id를 가진 태그를 가진 것을 찾아서 인스턴스를 붙이겠다는 의미
+        // 붙이는 순간 div안에서 뷰의 기능과 속성이 유효해진다.
+        el: "#app",
+        data: {
+          message: "hi",
+        },
+      });
+
+      // 객체로 변수를 정의 (이 방법보다는 위의 방법이 가독성이 더 좋은 것 같음)
+      // var options = {
+      //   el: '#app',
+      //   data: {
+      //     message: 'hi'
+      //   }
+      // }
+      // var vm = new Vue(options);
+    </script>
+  </body>
+</html>
