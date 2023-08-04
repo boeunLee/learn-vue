@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 메서드 이름"></app-header> -->
+      <!-- pass라는 이벤트가 아래에서 올라왔을때, 컴포넌트 태그에서 받아서 logText라는 메서드를 실행한다. -->
+      <app-header v-on:pass="logText"></app-header>
+      <app-content v-on:addnum="logNum"></app-content>
+      <p>{{num}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      var appHeader = {
+        // app-heaer에서 root로 이벤트를 보낼 것이다.
+        template: '<button  v-on:click="passEvent">click me</button>',
+        methods: {
+          passEvent: function () {
+            this.$emit("pass"); //button을 클릭하면 pass라는 이벤트가 발생할 것이다.
+          },
+        },
+      };
+
+      var appContent = {
+        template: '<button v-on:click="addNumber">add</button>',
+        methods: {
+          addNumber: function () {
+            this.$emit("addnum");
+          },
+        },
+      };
+
+      // root 컴포넌트
+      new Vue({
+        el: "#app",
+        components: {
+          "app-header": appHeader,
+          "app-content": appContent,
+        },
+        methods: {
+          logText: function () {
+            console.log("hi");
+          },
+          logNum: function () {
+            // this는 Vue 인스턴스 자체를 나타낸다.
+            // 따라서 this.num을 사용하면 Vue 인스턴스의 data 객체에 정의된 num 속성에 접근할 수 있다.
+            // 이렇게 데이터 속성 및 메서드를 파라미터로 전달하지 않고도 접근할 수 있다.
+            // 이 기능은 Vue에서 데이터 조작 및 Vue 인스턴스 및 구성 요소와의 상호작용을 단순화하는 기능이다.
+            this.num = this.num + 1;
+          },
+        },
+        data: {
+          num: 10,
+        },
+      });
+    </script>
+  </body>
+</html>

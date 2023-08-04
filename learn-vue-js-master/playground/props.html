@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <app-header v-bind: 프롭스 속성 이름 = "상위 컴포넌트의 데이터 이름" ></app-header> -->
+      <!-- 주의: v-bind뒤 띄어쓰기 하면 오류. 붙여서 쓰기 -->
+      <app-header v-bind:propsdata="message"></app-header>
+      <app-content v-bind:propsnum="num"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      var appHeader = {
+        template: "<h1>{{propsdata}}</h1>",
+        props: ["propsdata"],
+      };
+      var appContent = {
+        template: "<div>{{propsnum}}</div>",
+        props: ["propsnum"], // propsdata라고 동일한 이름으로 정의해도 괜찮다. 데이터 유효범위는 고유의 유효범위를 가지기 때문이다.
+      };
+      new Vue({
+        el: "#app",
+        components: {
+          "app-header": appHeader,
+          "app-content": appContent,
+        },
+        data: {
+          message: "hi",
+          num: 10,
+        },
+      });
+    </script>
+  </body>
+</html>
