@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 같은 레벨에서의 컴포넌트 통신 -->
+    <div id="app">
+      {{num}}
+      <app-header v-bind:propsdata="num"></app-header>
+      <app-content v-on:pass="deliverNum"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      var appHeader = {
+        template: "<div>header</div>",
+        props: ["propsdata"],
+      };
+      var appContent = {
+        template:
+          "<div>content<button v-on:click='passNum'>pass</button></div>",
+        methods: {
+          passNum: function () {
+            // 10을 넘겨주는것
+            // 같은레벨인 appHeader에 바로 전달하지 못하므로 Root에 먼저 넘겨준다
+            // Root에서 appHeaer에 10을 전달한다
+            this.$emit("pass", 10);
+          },
+        },
+      };
+
+      new Vue({
+        el: "#app",
+        components: {
+          "app-header": appHeader,
+          "app-content": appContent,
+        },
+        data: {
+          // num 선언
+          num: 0,
+        },
+        methods: {
+          // this.$emit("pass", 10); 에서 넘겨준 10을  value로 받을 수 있음
+          deliverNum: function (value) {
+            this.num = value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
