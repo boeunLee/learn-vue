@@ -9,8 +9,17 @@
     <div id="app">
       <!-- p태그의 id를 data로 관리하기 -->
       <!-- uuid를 화면의 특정 태그 id로 연결하려면 v-bind 연결 -->
-      <p v-bind:id="uuid">{{num}}</p>
+      <!-- class도 마찬가지로 v-bind로 연결할 수 있다. -->
+      <p v-bind:id="uuid" v-bind:class="name">{{num}}</p>
       <p>{{doubleNum}}</p>
+
+      <!-- 유저가 로그인 하기 전 로딩 상태 -->
+      <!-- v-if (loading이 true면) -->
+      <div v-if="loading">Loading...</div>
+
+      <!-- 유저가 로그인한 후 상태표시 -->
+      <!-- v-else (loading이 false면) -->
+      <div v-else>test user has been logged in</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,7 +30,10 @@
         data: {
           num: 10,
           // p태그의 id를 uuid라는 데이터 속성으로 관리
+          // 여기서 uuid를 바꾸면 p태그의 id도 당연히 바뀌게 됨 (reactivity)
           uuid: "abc1234",
+          name: "text-blue",
+          loading: true,
         },
         // 우리는 이미 num이 어떤 값인지 안다
         // doubleNum은 이미 아는 num의 값이 변경되는 것이므로 computed라는 속성을 사용하면 유용하다
