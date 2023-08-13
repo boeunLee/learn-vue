@@ -13,6 +13,12 @@
       <p v-bind:id="uuid" v-bind:class="name">{{num}}</p>
       <p>{{doubleNum}}</p>
 
+      <!-- v-if와 v-show의 차이점 -->
+      <!-- 둘 다 loading이 true면 보여지지만, -->
+      <!-- loading이 false로 바뀌게 되면 -->
+      <!-- v-if는 아예 돔을 제거하고 -->
+      <!-- v-show는 css스타일로 display:none을 통해 외관상으로 보이지 않게 하는 것. 돔의 정보는 남이 있다. -->
+
       <!-- 유저가 로그인 하기 전 로딩 상태 -->
       <!-- v-if (loading이 true면) -->
       <div v-if="loading">Loading...</div>
@@ -20,6 +26,14 @@
       <!-- 유저가 로그인한 후 상태표시 -->
       <!-- v-else (loading이 false면) -->
       <div v-else>test user has been logged in</div>
+
+      <!-- loading이 true인 상태에서 보여진다 -->
+      <div v-show="loading">Loading...</div>
+
+      <!-- input 박스를 만들고 입력된 값을 p태그에 출력해보자 -->
+      <!-- v-model로 message를 연결하면, input에 입력한 값이 message에 동기화된다. -->
+      <input type="text" v-model="message" />
+      <p>Message is: {{message}}</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -34,6 +48,7 @@
           uuid: "abc1234",
           name: "text-blue",
           loading: true,
+          message: "", //input값
         },
         // 우리는 이미 num이 어떤 값인지 안다
         // doubleNum은 이미 아는 num의 값이 변경되는 것이므로 computed라는 속성을 사용하면 유용하다
