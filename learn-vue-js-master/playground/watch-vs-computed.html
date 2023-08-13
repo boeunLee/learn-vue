@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{num}}</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          num: 10,
+        },
+        // data의 num이 기준
+        // 빠르게 계산된다
+        // 단순한 값에 대한 계산, 특히 validation 대부분이 computed 속성으로 이루어져있다.
+        // computed가 캐싱같은 내부적인 튜닝이 더 많이 되어있기 때문에, watch보다는 computed로 간단한 값들을 계산하는것을 추천
+        computed: {
+          doubleNum: function () {
+            return this.num * 2;
+          },
+        },
+
+        // num이 바뀌었을때 특정로직 실행
+        // 무거운 로직(매번 실행하기 부담스로운 로직, 데이터 요청같은)에서 사용
+        watch: {
+          // 갱신된값, 이전값을 인자로 받을 수 있음
+          num: function (newValue, oldValue) {
+            this.fetchUserByNumber(newValue);
+          },
+        },
+        methods: {
+          fetchUserByNumber: function (num) {
+            axios.get(num);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
