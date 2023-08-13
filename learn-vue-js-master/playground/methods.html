@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 버튼 이벤트 추가 -->
+      <!-- v-on:click="메서드 이름" -->
+      <button v-on:click="logText">click me</button>
+
+      <!-- 키보드 이벤트 추가 -->
+      <!-- v-on:키보드 이벤트 타입="메서드 이름" -->
+      <input type="text" v-on:keyup="logText" />
+      <!-- enter를 쳤을때만 logText 실행 (event modifier) -->
+      <input type="text" v-on:keyup.enter="logText" />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      new Vue({
+        el: "app",
+        methods: {
+          logText: function () {
+            console.log("clicked");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
