@@ -3,7 +3,10 @@
     {{ str }}
     <!-- 프롭스 전달 -->
     <!-- <app-header v-bind:하위 컴포넌트에서 정의한 프롭스 속성 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
-    <app-header v-bind:propsdata="str"></app-header>
+
+    <!-- event emit -->
+    <!-- v-on:하위 컴포넌트에서 올라온 이벤트 이름="실행할 메서드 이름" -->
+    <app-header v-bind:propsdata="str" v-on:renew="renewStr"></app-header>
   </div>
 </template>
 
@@ -21,6 +24,11 @@ export default {
   },
   components: {
     "app-header": AppHeader,
+  },
+  methods: {
+    renewStr: function () {
+      this.str = "hello";
+    },
   },
 };
 </script>
